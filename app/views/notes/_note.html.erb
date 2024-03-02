@@ -1,0 +1,13 @@
+<div id="<%= dom_id note %>">
+  <h1>
+    <%= note.title %> <%= "🔒" if note.private? %>
+  </h1>
+
+  <div>
+    Tags: <%= note.tags.map { |note| "##{note}" }.join("  ") %>
+  </div>
+
+  <p>
+    <%= MarkdownRenderer.convert_markdown(note.content).html_safe %>
+  </p>
+</div>
