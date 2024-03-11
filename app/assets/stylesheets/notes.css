@@ -12,6 +12,7 @@ a {
 
 .content {
   grid-area: content;
+  overflow: auto;
 }
 
 .content img {
@@ -97,4 +98,8 @@ input {
 
 .note-content textarea {
   width: 100%;
+}
+
+.CodeRay {
+  overflow: auto;
 }
