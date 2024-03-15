@@ -3,7 +3,7 @@
     <li>
       <%= link_to note.title, note %>
       <%= "🔒" if note.private? %>
-      <%= note.tags.map { |tag| "##{tag}" }.join(" ") %>
+      <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
     </li>
   <% end %>
 </ul>

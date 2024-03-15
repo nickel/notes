@@ -8,6 +8,7 @@ class NotesController < ApplicationController
   # GET /notes or /notes.json
   def index
     @notes = logged_in? ? Note.all : Note.where(private: false)
+    @notes = @notes.where("? = ANY(tags)", params[:tag]) if params[:tag]
 
     @notes = @notes.order(updated_at: :desc)
   end
