@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class NotesController < ApplicationController
   include UsersHelper
 
-  before_action :set_note, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[ new create edit update destroy ]
-  before_action :require_user_if_private, only: %i[ show ]
+  before_action :set_note, only: %i(show edit update destroy)
+  before_action :authenticate_user!, only: %i(new create edit update destroy)
+  before_action :require_user_if_private, only: %i(show)
 
   # GET /notes or /notes.json
   def index
@@ -65,26 +67,27 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def note_params
-      tags = (params.dig(:note, :tags) || []).split(",").map(&:strip)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
-      params
-        .require(:note)
-        .permit(:title, :content, :tags, :private)
-        .merge(tags:)
-    end
+  # Only allow a list of trusted parameters through.
+  def note_params
+    tags = (params.dig(:note, :tags) || []).split(",").map(&:strip)
 
-    def authenticate_user!
-      redirect_to root_path unless logged_in?
-    end
+    params
+      .require(:note)
+      .permit(:title, :content, :tags, :private)
+      .merge(tags:)
+  end
 
-    def require_user_if_private
-      redirect_to root_path if @note.private? && !logged_in?
-    end
+  def authenticate_user!
+    redirect_to root_path unless logged_in?
+  end
+
+  def require_user_if_private
+    redirect_to root_path if @note.private? && !logged_in?
+  end
 end
