@@ -1,0 +1,127 @@
+AllCops:
+  SuggestExtensions: false
+  NewCops: disable
+  Exclude:
+    - ".*/**/*"
+    - "bin/**/*"
+    - "coverage/**/*"
+    - "datadog/**/*"
+    - "doc/**/*"
+    - db/schema.rb
+    - db/migrate/*
+    - "log/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
+    - "tmp_doc/**/*"
+    - "vendor/**/*"
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 20
+  Exclude:
+    - "test/**/*"
+
+Metrics/BlockLength:
+  CountComments: false
+  Max: 25
+  Exclude:
+    - "Rakefile"
+    - "config/routes.rb"
+    - "config/environments/*"
+    - "**/*.rake"
+    - "test/**/*"
+    - "*.gemspec"
+  AllowedMethods: ["class_methods"]
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 15
+  Exclude:
+    - "test/**/*"
+
+Metrics/ParameterLists:
+  Exclude:
+    - "test/**/*"
+
+Naming/PredicateName:
+  Enabled: true
+  NamePrefix:
+    - is_
+    - not_
+    - does_
+    - can_
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Layout/DotPosition:
+  EnforcedStyle: leading
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect: "map"
+    collect!: "map!"
+    inject: "reduce"
+    detect: "find"
+    find_all: "select"
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/GlobalVars:
+  AllowedVariables: [$fog_storage, $redis]
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    "%r": "{}"
+    "%w": "()"
+    "%W": "()"
+    "%i": "()"
+    "%I": "()"
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/SingleLineMethods:
+  AllowIfMethodIsEmpty: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/WordArray:
+  EnforcedStyle: percent
+
+Style/NumericLiterals:
+  Enabled: true
+  MinDigits: 5
+  Strict: false
