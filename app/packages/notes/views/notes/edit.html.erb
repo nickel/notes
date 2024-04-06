@@ -1,1 +1,3 @@
-<%= render "form", note: @note %>
+<%= form_for @note_form, url: note_path(@note.id), method: :put, html: { class: "max-w-sm mx-auto mt-20" } do |form| %>
+  <%= render "form", note: @note_form, form: form %>
+<% end %>

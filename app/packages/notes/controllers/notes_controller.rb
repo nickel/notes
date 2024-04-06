@@ -18,51 +18,64 @@ class NotesController < ApplicationController
   end
 
   def new
-    @note = Note.new
+    @note_form = Note::Create::Form.new
   end
 
   def edit
+    @note_form = Note::Update::Form.new(
+      @note.attributes
+        .slice(:title, :content, :tags, :private)
+        .merge(note_id: params[:id])
+    )
   end
 
   def create
-    @note = Note.new(note_params)
+    response = Note::Create.call(**input_data_for_create)
 
-    if @note.save
-      redirect_to note_url(@note), notice: "Note was successfully created."
+    if response.success?
+      redirect_to note_url(response.value.id), notice: "Note was successfully created."
     else
+      @note_form = response.value.data
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @note.update(note_params)
-      redirect_to note_url(@note), notice: "Note was successfully updated."
+    response = Note::Update.call(**input_data_for_update)
+
+    if response.success?
+      redirect_to note_url(response.value.id), notice: "Note was successfully updated."
     else
+      @note_form = response.value.data
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @note.destroy!
+    Note::Remove.call(note_id: @note.id)
 
-    redirect_to notes_url, notice: "Note was successfully destroyed."
+    redirect_to notes_url
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_note
-    @note = Note.find(params[:id])
+    @note = Note::Find.call(
+      note_id: params[:id]
+    ).value!
   end
 
-  # Only allow a list of trusted parameters through.
-  def note_params
-    tags = (params.dig(:note, :tags) || []).split(",").map(&:strip)
-
+  def input_data_for_create
     params
-      .require(:note)
+      .require(:note_create_form)
       .permit(:title, :content, :tags, :private)
-      .merge(tags:)
+  end
+
+  def input_data_for_update
+    params
+      .require(:note_update_form)
+      .permit(:title, :content, :tags, :private)
+      .merge(note_id: @note.id)
   end
 
   def authenticate_user!
