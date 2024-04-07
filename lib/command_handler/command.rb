@@ -21,7 +21,7 @@ module CommandHandler
         end
       else
         Response.failure(
-          CommandHandler::Errors::InvalidInputError.build(form:)
+          Errors::InvalidInputError.build(form:)
         )
       end
     rescue Exception => e # rubocop:disable Lint/RescueException

@@ -21,8 +21,8 @@ class Note::FindAll < CommandHandler::Command
   private
 
   def find_all
-    notes = by_visibility == "private" ? Note.where(private: false) : Note.all
+    notes = by_visibility == "private" ? Note.all : Note.where(private: false)
     notes = notes.where("? = ANY(tags)", by_tag) if by_tag.present?
-    notes
+    notes.order(updated_at: :desc)
   end
 end

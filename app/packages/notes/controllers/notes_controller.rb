@@ -8,10 +8,10 @@ class NotesController < ApplicationController
   before_action :require_user_if_private, only: %i(show)
 
   def index
-    @notes = logged_in? ? Note.all : Note.where(private: false)
-    @notes = @notes.where("? = ANY(tags)", params[:tag]) if params[:tag]
-
-    @notes = @notes.order(updated_at: :desc)
+    @notes = Note::FindAll.call(
+      by_visibility: logged_in? ? "private" : "public",
+      by_tag: params[:tag]
+    ).value!
   end
 
   def show

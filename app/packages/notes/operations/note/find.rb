@@ -16,7 +16,7 @@ class Note::Find < CommandHandler::Command
       Response.success(note.to_struct)
     else
       Response.failure(
-        Errors::RecordNotFoundError
+        CommandHandler::Errors::RecordNotFoundError
           .build(form:)
       )
     end
