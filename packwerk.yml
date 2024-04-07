@@ -1,0 +1,8 @@
+exclude:
+- 'spec/support/**/*'
+- '**/lib/tasks/**/*.rake'
+- '{bin,node_modules,script,tmp,vendor,VENDORED_GEMS}/**/*'
+
+package_paths:
+- ./packages/*
+- .
