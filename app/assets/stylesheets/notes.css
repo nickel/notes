@@ -1,91 +1,41 @@
-html {
-  height: 100%;
-}
-
-a {
-  color: #222;
-}
-
-.sidebar {
-  grid-area: sidebar;
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", helvetica, sans-serif;
+  line-height: 1.4;
 }
 
 .content {
-  grid-area: content;
   overflow: auto;
+  max-width: 800px;
 }
 
 .content img {
   max-width: 100%;
 }
 
-.header {
-  grid-area: header;
-}
-
 .wrapper {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 1fr 300px;
-  grid-template-rows: 70px 1fr;
-  grid-template-areas:
-              "header header"
-              "content sidebar";
   background-color: #fff;
   color: #000;
-  height: 99vh;
 }
 
 .box {
-  background-color: #efefef;
-  border-radius: 5px;
-  padding: 20px;
-  font-size: 150%;
-}
-
-@media (width <= 992px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-    grid-template-rows: 70px auto 1fr;
-    grid-template-areas:
-              "header"
-              "sidebar"
-              "content";
-  }
-
-  pre {
-    white-space: pre-wrap;
-  }
-
-  .box {
-    font-size: 135%;
-  }
+  padding: 8px 2em 8px 2em;
 }
 
 .header {
-  background-color: #aaa;
+  background: linear-gradient(180deg, rgba(0,125,221,1) 0%, rgba(26,156,255,1) 50%, rgba(26,156,255,1) 100%);
+  overflow: hidden;
 }
 
-.header .logo {
-  color: black;
+.header a {
+  float: left;
+  color: white;
   text-decoration: none;
-  font-size: 30px;
-  font-weight: bolder;
-  height: 32px;
+  font-size: 18px;
 }
 
-.header .logo img {
-  vertical-align: text-top;
-}
-
-.sidebar {
-  background-color: #999;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.header .actions {
+  float: right;
 }
 
 input {
@@ -102,4 +52,25 @@ input {
 
 .CodeRay {
   overflow: auto;
+}
+
+ul.note-actions, ul#notes {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.note-actions {
+  margin-bottom: 20px;
+  border: 1px solid #777;
+  padding: 20px;
+  background-color: #ccc;
+}
+
+ul.note-actions a {
+  color: #000;
+}
+
+ul#notes li {
+  margin-bottom: 5px;
 }

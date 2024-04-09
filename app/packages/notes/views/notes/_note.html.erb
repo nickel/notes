@@ -3,8 +3,16 @@
     <%= note.title %> <%= "🔒" if note.private? %>
   </h1>
 
+  <% if logged_in? %>
+    <ul class="note-actions">
+      <li><%= link_to "Edit this note", edit_note_path(@note.id) %></li>
+      <li><%= link_to "Destroy this note", note_path(@note.id), data: { "turbo-method": :delete } %></li>
+    </ul>
+  <% end %>
+
+
   <div>
-    Tags: <%= note.tags.map { |note| "##{note}" }.join("  ") %>
+    Tags: <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
   </div>
 
   <p>

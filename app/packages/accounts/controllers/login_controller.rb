@@ -9,6 +9,12 @@ class LoginController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    session[:auth] = false
+
+    redirect_to root_path
+  end
+
   private
 
   def authenticate_user!
