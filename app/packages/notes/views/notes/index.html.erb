@@ -1,3 +1,13 @@
+<h1>
+  Juan Gallego IV: Notes <%= "on #{params[:tag]}" if params[:tag].present? %> 
+</h1>
+
+<% if logged_in? %>
+  <ul class="note-actions">
+    <li><%= link_to "New note", new_note_path %></li>
+  </ul>
+<% end %>
+
 <ul id="notes">
   <% @notes.each do |note| %>
     <li>
@@ -7,7 +17,3 @@
     </li>
   <% end %>
 </ul>
-
-<% if logged_in? %>
-  <%= link_to "New note", new_note_path %>
-<% end %>

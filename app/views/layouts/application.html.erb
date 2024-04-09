@@ -11,14 +11,23 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <meta name="robots" content="index, follow" />
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <main class="wrapper">
       <header class="box header">
-        <%= link_to root_path, class: "logo" do %>
-          <%= image_tag "logo.png" %> Notes
+        <%= link_to root_path do %>
+          Juan Gallego IV's Notes
         <% end %>
+
+        <div class="actions">
+          <% if !logged_in? %>
+            <%= link_to "⚙︎", login_path, data: { "turbo-method": :post } %>
+          <% else %>
+            <%= link_to "⌀", logout_path, data: { "turbo-method": :delete } %>
+          <% end %>
+        </div>
       </header>
       <section class="box content">
         <% if notice %>
@@ -27,12 +36,6 @@
 
         <%= yield %>
       </section>
-      <aside class="box sidebar">
-        <% if !logged_in? %>
-          <%= button_to "Login", login_path, method: :post %>
-        <% end %>
-        <%= yield(:sidebar) %>
-      </aside>
     </main>
   </body>
 </html>
