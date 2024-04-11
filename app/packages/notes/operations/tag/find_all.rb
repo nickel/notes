@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-class Note::FindAll < CommandHandler::Command
-  BY_VISIBILITY_FILTERS = %w(public private).freeze
+class Tag::FindAll < CommandHandler::Command
+  BY_VISIBILITY_FILTERS = Note::FindAll::BY_VISIBILITY_FILTERS
 
   class Form
     include CommandHandler::Form
 
-    attribute :by_tag
     attribute :by_visibility, :string, default: "public"
 
     validates :by_visibility, inclusion: { in: BY_VISIBILITY_FILTERS }
@@ -21,8 +20,13 @@ class Note::FindAll < CommandHandler::Command
   private
 
   def find_all
-    notes = by_visibility == "private" ? Note.all : Note.where(private: false)
-    notes = notes.where("? = ANY(tags)", by_tag) if by_tag.present?
-    notes.order(created_at: :desc)
+    notes = Note.select(:tags)
+    notes = by_visibility == "private" ? notes : Note.where(private: false)
+
+    notes
+      .map(&:tags)
+      .flatten
+      .tally
+      .sort_by { |_, count| -count }
   end
 end

@@ -1,3 +1,7 @@
 <%= form_for @note_form, url: notes_path, html: { class: "max-w-sm mx-auto mt-20" } do |form| %>
   <%= render "form", note: @note_form, form: form %>
+
+  <div>
+    <%= form.submit "Create note" %>
+  </div>
 <% end %>

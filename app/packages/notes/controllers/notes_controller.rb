@@ -8,10 +8,15 @@ class NotesController < ApplicationController
   before_action :require_user_if_private, only: %i(show)
 
   def index
+    by_visibility = logged_in? ? "private" : "public"
+
     @notes = Note::FindAll.call(
-      by_visibility: logged_in? ? "private" : "public",
-      by_tag: params[:tag]
-    ).value!
+      by_visibility:, by_tag: params[:tag]
+    ).value
+
+    @tags = Tag::FindAll.call(
+      by_visibility:
+    ).value
   end
 
   def show
