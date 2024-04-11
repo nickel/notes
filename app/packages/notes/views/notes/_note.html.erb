@@ -1,6 +1,6 @@
 <div id="note-<%= note.id %>">
   <h1>
-    <%= note.title %> <%= "🔒" if note.private? %>
+    <%= note.title %>
   </h1>
 
   <% if logged_in? %>
@@ -10,10 +10,13 @@
     </ul>
   <% end %>
 
-
   <div>
     Tags: <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
   </div>
+
+  <% if note.private? %>
+    <small>This note is private 🔒</small>
+  <% end %>
 
   <p>
     <%= MarkdownRenderer.convert_markdown(note.content).html_safe %>

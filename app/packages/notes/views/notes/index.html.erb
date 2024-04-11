@@ -8,12 +8,25 @@
   </ul>
 <% end %>
 
+<p>
+  Browse by tag:
+
+  <%= @tags
+    .map { |tag, count| "#{link_to tag, notes_path(tag: tag)} #{count}" }
+    .join(" · ") 
+    .html_safe %>
+</p>
+
+<h2>Recent notes</h2>
+
 <ul id="notes">
   <% @notes.each do |note| %>
     <li>
-      <%= link_to note.title, note %>
+      <h3><%= link_to note.title, note %> - <%= note.created_at.strftime("%Y-%m-%d") %></h3>
       <%= "🔒" if note.private? %>
       <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
+
+      <p><%= truncate(note.intro, length: 200)  %></p>
     </li>
   <% end %>
 </ul>

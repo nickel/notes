@@ -61,7 +61,7 @@ ul.note-actions, ul#notes {
 }
 
 ul.note-actions {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   border: 1px solid #777;
   padding: 20px;
   background-color: #ccc;
@@ -75,4 +75,9 @@ ul#notes li {
   border-bottom: 1px dotted #eee;
   padding-bottom: 10px;
   margin-bottom: 10px;
+}
+
+ul#notes li h3 {
+  display: inline-block;
+  margin: 0;
 }
