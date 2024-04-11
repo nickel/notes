@@ -26,7 +26,7 @@
       <%= "🔒" if note.private? %>
       <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
 
-      <p><%= truncate(note.intro, length: 200)  %></p>
+      <p><%= MarkdownRenderer.convert_markdown(truncate(note.intro, length: 200)).html_safe  %></p>
     </li>
   <% end %>
 </ul>
