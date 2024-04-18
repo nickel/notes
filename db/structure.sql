@@ -36,7 +36,8 @@ CREATE TABLE public.notes (
     tags character varying[] DEFAULT '{}'::character varying[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    private boolean DEFAULT false NOT NULL
+    private boolean DEFAULT false NOT NULL,
+    searchable tsvector GENERATED ALWAYS AS (((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, COALESCE(content, ''::text)), 'B'::"char")) || setweight(array_to_tsvector((tags)::text[]), 'C'::"char"))) STORED
 );
 
 
@@ -100,12 +101,21 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: index_notes_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notes_on_searchable ON public.notes USING gin (searchable);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240418085920'),
+('20240418085150'),
 ('20240225201400'),
 ('20240221084625');
 
