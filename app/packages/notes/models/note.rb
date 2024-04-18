@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search,
+                  against: { title: "A", content: "B" },
+                  using: {
+                    tsearch: {
+                      dictionary: "english", tsvector_column: "searchable"
+                    }
+                  }
+
   def intro
     return "" unless content.present?
 

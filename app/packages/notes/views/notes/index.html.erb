@@ -12,8 +12,13 @@
   </ul>
 <% end %>
 
+<%= form_tag notes_path, method: :get do %>
+  <%= text_field_tag :q, params[:q], type: "search" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <p>
-  Browse by tag:
+  <strong>Browse by tag:</strong>
 
   <%= @tags
     .map { |tag, count| "#{link_to tag, notes_path(tag: tag)} #{count}" }
