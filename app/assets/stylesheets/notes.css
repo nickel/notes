@@ -37,13 +37,18 @@ main {
   text-decoration: none;
   font-size: 2em;
   color: black;
-  font-size: 2em;
   margin-block-start: 0.67em;
   margin-block-end: 0.67em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
   unicode-bidi: isolate;
+}
+
+@media only screen and (max-width: 600px) {
+  .header a {
+    font-size: 1.4em;
+  }
 }
 
 .header .actions {
