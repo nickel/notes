@@ -12,6 +12,8 @@
 
     <meta name="robots" content="index, follow" />
     <%= javascript_importmap_tags %>
+
+    <script src="https://kit.fontawesome.com/2d6988e41b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -22,10 +24,16 @@
       <% end %>
 
       <div class="actions">
+        <%= yield(:actions) %>
+
         <% if !logged_in? %>
-          <%= link_to "⚙︎", login_path, data: { "turbo-method": :post } %>
+          <%= link_to login_path, data: { "turbo-method": :post } do %>
+            <i class="fa-solid fa-gear"></i>
+          <% end %>
         <% else %>
-          <%= link_to "⌀", logout_path, data: { "turbo-method": :delete } %>
+          <%= link_to logout_path, data: { "turbo-method": :delete } do %>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <% end %>
         <% end %>
       </div>
     </header>

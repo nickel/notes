@@ -51,6 +51,10 @@ main {
   margin-right: 20px;
 }
 
+.header .actions a {
+  margin-right: 5px;
+}
+
 input[type=search] {
   padding: .25em;
   font-size: 16px;
