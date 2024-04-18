@@ -1,7 +1,12 @@
 body {
   margin: 0;
   font-family: "Ubuntu", sans-serif;
-  line-height: 1.4;
+}
+
+.banner {
+  background: linear-gradient(180deg, rgba(0,125,221,1) 0%, rgba(26,156,255,1) 50%, rgba(26,156,255,1) 100%);
+  overflow: hidden;
+  height: 5px;
 }
 
 .content {
@@ -18,24 +23,32 @@ body {
   color: #000;
 }
 
-.box {
-  padding: 8px 2em 8px 2em;
+header, main {
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
-.header {
-  background: linear-gradient(180deg, rgba(0,125,221,1) 0%, rgba(26,156,255,1) 50%, rgba(26,156,255,1) 100%);
-  overflow: hidden;
+main {
+  padding-left: 20px;
 }
 
 .header a {
-  float: left;
-  color: white;
+  display: inline-block;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 2em;
+  color: black;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
 }
 
 .header .actions {
   float: right;
+  margin-right: 20px;
 }
 
 input[type=search] {

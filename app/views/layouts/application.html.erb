@@ -19,21 +19,23 @@
   </head>
 
   <body>
-    <main class="wrapper">
-      <header class="box header">
-        <%= link_to root_path do %>
-          Juan Gallego IV's Notes
-        <% end %>
+    <div class="banner"></div>
+    <header class="header">
+      <%= link_to root_path do %>
+        📝 Juan Gallego IV's Notes
+      <% end %>
 
-        <div class="actions">
-          <% if !logged_in? %>
-            <%= link_to "⚙︎", login_path, data: { "turbo-method": :post } %>
-          <% else %>
-            <%= link_to "⌀", logout_path, data: { "turbo-method": :delete } %>
-          <% end %>
-        </div>
-      </header>
-      <section class="box content">
+      <div class="actions">
+        <% if !logged_in? %>
+          <%= link_to "⚙︎", login_path, data: { "turbo-method": :post } %>
+        <% else %>
+          <%= link_to "⌀", logout_path, data: { "turbo-method": :delete } %>
+        <% end %>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="content">
         <% if notice %>
           <p style="color: green"><%= notice %></p>
         <% end %>
