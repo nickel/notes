@@ -2,6 +2,10 @@
   Notes <%= "on #{params[:tag]}" if params[:tag].present? %> 
 </h1>
 
+<p>
+  Things to remember and to keep nearby. Check my <a href="https://juan.gallegoiv.com">homepage</a> also.
+</p>
+
 <% if logged_in? %>
   <ul class="note-actions">
     <li><%= link_to "New note", new_note_path %></li>
