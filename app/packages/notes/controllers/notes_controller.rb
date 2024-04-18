@@ -11,7 +11,7 @@ class NotesController < ApplicationController
     by_visibility = logged_in? ? "private" : "public"
 
     @notes = Note::FindAll.call(
-      by_visibility:, by_tag: params[:tag]
+      by_visibility:, by_tag: params[:tag], by_query: params[:q]
     ).value
 
     @tags = Tag::FindAll.call(

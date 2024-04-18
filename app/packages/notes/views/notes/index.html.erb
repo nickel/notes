@@ -12,6 +12,11 @@
   </ul>
 <% end %>
 
+<%= form_tag notes_path, method: :get do %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <p>
   Browse by tag:
 

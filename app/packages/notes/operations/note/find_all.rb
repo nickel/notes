@@ -6,6 +6,7 @@ class Note::FindAll < CommandHandler::Command
   class Form
     include CommandHandler::Form
 
+    attribute :by_query
     attribute :by_tag
     attribute :by_visibility, :string, default: "public"
 
@@ -23,6 +24,8 @@ class Note::FindAll < CommandHandler::Command
   def find_all
     notes = by_visibility == "private" ? Note.all : Note.where(private: false)
     notes = notes.where("? = ANY(tags)", by_tag) if by_tag.present?
-    notes.order(created_at: :desc)
+    notes = notes.search(by_query) if by_query.present?
+
+    notes.reorder(created_at: :desc)
   end
 end
