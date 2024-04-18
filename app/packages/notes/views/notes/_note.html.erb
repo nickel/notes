@@ -1,21 +1,26 @@
+<% content_for(:actions) do %>
+  <% if logged_in? %>
+    <%= link_to edit_note_path(@note.id) do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+
+    <%= link_to note_path(@note.id), data: { "turbo-method": :delete } do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>
+  <% end %>
+<% end %>
+
 <div id="note-<%= note.id %>">
   <h1>
     <%= note.title %>
   </h1>
-
-  <% if logged_in? %>
-    <ul class="note-actions">
-      <li><%= link_to "Edit this note", edit_note_path(@note.id) %></li>
-      <li><%= link_to "Destroy this note", note_path(@note.id), data: { "turbo-method": :delete } %></li>
-    </ul>
-  <% end %>
 
   <div>
     Tags: <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
   </div>
 
   <% if note.private? %>
-    <small>This note is private 🔒</small>
+    <small>This note is private <i class="fa-solid fa-lock"></i></small>
   <% end %>
 
   <p>

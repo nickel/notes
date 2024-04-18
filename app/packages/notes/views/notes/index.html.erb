@@ -1,3 +1,11 @@
+<% content_for(:actions) do %>
+  <% if logged_in? %>
+    <%= link_to new_note_path do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  <% end %>
+<% end %>
+
 <h1>
   Notes <%= "on #{params[:tag]}" if params[:tag].present? %> 
 </h1>
@@ -5,12 +13,6 @@
 <p>
   Things to remember and to keep nearby. Check my <a href="https://juan.gallegoiv.com">homepage</a> also.
 </p>
-
-<% if logged_in? %>
-  <ul class="note-actions">
-    <li><%= link_to "New note", new_note_path %></li>
-  </ul>
-<% end %>
 
 <%= form_tag notes_path, method: :get do %>
   <%= text_field_tag :q, params[:q], type: "search" %>
@@ -32,7 +34,9 @@
   <% @notes.each do |note| %>
     <li>
       <h3><%= link_to note.title, note %> - <%= note.created_at.strftime("%Y-%m-%d") %></h3>
-      <%= "🔒" if note.private? %>
+      <% if note.private? %>
+        <i class="fa-solid fa-lock"></i>
+      <% end %>
       <%= note.tags.map { |tag| link_to "##{tag}", notes_path(tag: tag) }.join(" ").html_safe %>
 
       <p><%= MarkdownRenderer.convert_markdown(truncate(note.intro, length: 200)).html_safe  %></p>
