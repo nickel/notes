@@ -3,10 +3,10 @@
 class Note < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search,
-                  against: { title: "A", content: "B" },
+                  against: { title: "A", content: "B", tags: "C" },
                   using: {
                     tsearch: {
-                      dictionary: "english", tsvector_column: "searchable"
+                      dictionary: "simple", tsvector_column: "searchable"
                     }
                   }
 
