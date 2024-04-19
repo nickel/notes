@@ -9,9 +9,6 @@ atom_feed do |feed|
       entry.title(note.title)
       entry.intro(MarkdownRenderer.convert_markdown(note.intro), type: "html")
       entry.content(MarkdownRenderer.convert_markdown(note.content), type: "html")
-      entry.pubDate note.created_at.rfc822
-      entry.link note_url(note)
-      entry.guid note_url(note)
 
       entry.author do |author|
         author.name("Juan Gallego IV")
