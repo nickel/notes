@@ -17,6 +17,11 @@ class NotesController < ApplicationController
     @tags = Tag::FindAll.call(
       by_visibility:
     ).value
+
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
 
   def show
